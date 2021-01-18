@@ -24,3 +24,7 @@ Private key in format PKCS#8:
 ...
 ---END PRIVATE KEY-----
 ```
+
+> The base64-encoded text is an RSAPrivateKey from the PKCS#1 spec, which is just an ASN.1 SEQUENCE of integers that make up the RSA key. The corresponding .NET Core 3 API for this is `ImportRSAPrivateKey`, or one of its overloads. If your key is “PEM” encoded, you need to find the base64 text between the label BEGIN and END headers, base64 decode it, and pass to `ImportRSAPrivateKey`.
+
+> Unencrypted PKCS#8 keys can be imported with `ImportPkcs8PrivateKey`, and encrypted PKCS#8 keys can be imported with `ImportEncryptedPkcs8PrivateKey`. Their usage is similar to `ImportRSAPrivateKey`.
